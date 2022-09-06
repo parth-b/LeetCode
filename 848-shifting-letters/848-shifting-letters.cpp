@@ -1,14 +1,18 @@
 class Solution {
 public:
-    string shiftingLetters(string s, vector<int>& sh) {
-        int i = 0;
-        for(int j = sh.size() -2; j>=0; j--) sh[j] += sh[j+1], sh[j]%=26;
-        for(auto x : s) {
-            int t = x - 'a';
-            int a = sh[i]% 26;
-            t = (t+a+26)%26;
-            s[i++] = t + 'a'; 
+    string shiftingLetters(string s, vector<int>& shifts) {
+        int currShifts = 0;
+        
+        for(int i = s.size()-1; i >= 0; i--){
+            currShifts += shifts[i];
+            currShifts %= 26;
+            
+            if(currShifts > 'z' - s[i])
+                s[i] += currShifts - 26;
+            else      
+                s[i] += currShifts;
         }
+        
         return s;
     }
 };
