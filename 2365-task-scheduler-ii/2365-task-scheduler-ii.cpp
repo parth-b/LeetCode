@@ -1,20 +1,20 @@
 class Solution {
 public:
     long long taskSchedulerII(vector<int>& tasks, int space) {
-        unordered_map<int, long long> u;
-        long long ans = 0;
+        unordered_map<int, long long> last_occurence;
+        long long time_elapsed = 0;
         for(int i = 0; i< tasks.size(); i++) {
-            int t= tasks[i];
-            ans++;
-            if(!u[t])
-                u[t] = ans;    
+            int cur_task= tasks[i];
+            time_elapsed++;
+            if(!last_occurence[cur_task])
+                last_occurence[cur_task] = time_elapsed;    
             else {
-                int time_passed = ans-u[t];
+                int time_passed = time_elapsed - last_occurence[cur_task];
                 if(time_passed <= space) 
-                    ans+= (space - time_passed + 1);
-                u[t] = ans;
+                    time_elapsed+= (space - time_passed + 1);
+                last_occurence[cur_task] = time_elapsed;
             }
         }
-        return ans;
+        return time_elapsed;
     }
 };
