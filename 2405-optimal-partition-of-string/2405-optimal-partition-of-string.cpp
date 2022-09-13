@@ -1,11 +1,11 @@
 class Solution {
 public:
     int partitionString(string s) {
-        unordered_map<char, int> m;
+        unordered_set<int> m;
         int ans = 0;
         for(auto x : s) {
-            if(m[x]) ans++, m.clear();
-            m[x]++;
+            if(m.find(x)!=m.end()) ans++, m.clear();
+            m.insert(x);
         }
         return ans+1;
     }
