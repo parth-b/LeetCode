@@ -1,12 +1,11 @@
 class Solution {
 public:
-    
-    void dfs(int i, unordered_map<int,vector<int>>& m, int &count, vector<int> &vis) {
-        if(!vis[i]) {
-            vis[i] = 1;
-            count++;
-            for(auto x : m[i])
-                dfs(x, m, count, vis);
+    typedef long long ll;
+    void dfs(int node, unordered_map<int,vector<int>>& m, ll& cnt, vector<int>& vis){
+        vis[node] = 1;
+        cnt++;
+        for(auto& i: m[node]){
+            if(vis[i]==0) dfs(i,m,cnt,vis);   
         }
     }
     long long countPairs(int n, vector<vector<int>>& edges) {
@@ -15,14 +14,13 @@ public:
             m[edges[i][0]].push_back(edges[i][1]);
             m[edges[i][1]].push_back(edges[i][0]);
         }
-        long long ans =(long long) n * (n-1)/2;
-        vector<int> vis(n, 0);
-        
-        for(int i = 0; i<n; i++) {
-            if(!vis[i]) {
-                int count = 0;
-                dfs(i,m,count, vis);
-                ans -= (long long )count*(count - 1)/2;
+        ll ans = ((ll)n*(n-1))/2;
+        vector<int> vis(n,0);
+        for(int i=0;i<n;i++){
+            if(vis[i]==0){ 
+                ll cnt = 0;
+                dfs(i,m,cnt,vis);
+                ans -= (cnt*(cnt-1))/2;
             }
         }
         return ans;
