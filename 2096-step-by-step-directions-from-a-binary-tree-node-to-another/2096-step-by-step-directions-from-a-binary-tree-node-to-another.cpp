@@ -13,25 +13,19 @@ public:
         return false;
     }
     
-    TreeNode* lca (TreeNode* root, int start, int dest) {
-        if(!root) return NULL;
-        if(root->val == start or root->val == dest) return root;
-        TreeNode* l,*r;
-        l = lca(root->left, start, dest);
-        r = lca(root->right, start, dest);
-        if(l and r) return root;
-        return l? l: r; 
-    }
     
     string getDirections(TreeNode* root, int startValue, int destValue) {
-        TreeNode* n = lca(root, startValue, destValue);
         string s = "", d = "";
-        dfs(n, s, startValue);
-        dfs(n, d, destValue);
-        string ans = "";
-        for(int i = 0;i<s.length(); i++) 
-            ans+= 'U';
+        dfs(root, s, startValue);
+        dfs(root, d, destValue);
+        reverse(s.begin(), s.end());
+        reverse(d.begin(), d.end());
         
-        return ans+d;
+        while(!s.empty() and !d.empty() and s.back() == d.back()){
+            s.pop_back();
+            d.pop_back();
+
+        }
+        return string(s.size(), 'U') + string(d.rbegin(), d.rend());
      }
 };
