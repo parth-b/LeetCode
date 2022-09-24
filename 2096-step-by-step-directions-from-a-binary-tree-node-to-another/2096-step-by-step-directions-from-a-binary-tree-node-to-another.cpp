@@ -1,13 +1,13 @@
 class Solution {
 public:
     
-    bool dfs(TreeNode* root, vector<char> &s, int r) {
+    bool dfs(TreeNode* root, string &s, int r) {
         if(!root) return false;
         if( root->val == r) return true;
-        s.push_back('L');
+        s+= 'L';
         if(dfs(root->left, s, r)) return true;
         s.pop_back();
-        s.push_back('R');
+        s+='R';
         if(dfs(root->right, s, r)) return true;
          s.pop_back();
         return false;
@@ -25,13 +25,13 @@ public:
     
     string getDirections(TreeNode* root, int startValue, int destValue) {
         TreeNode* n = lca(root, startValue, destValue);
-        vector<char> s, d;
+        string s = "", d = "";
         dfs(n, s, startValue);
         dfs(n, d, destValue);
         string ans = "";
-        for(int i = 0;i<s.size(); i++) 
+        for(int i = 0;i<s.length(); i++) 
             ans+= 'U';
-        for(auto x : d) ans+=x;
-        return ans;
+        
+        return ans+d;
      }
 };
