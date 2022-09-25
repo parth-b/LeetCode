@@ -1,1 +1,1 @@
-​
+this is an alternate way, in which we consider the start and the length of the array at a particular given time.
