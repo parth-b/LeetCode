@@ -1,0 +1,1 @@
+Not a bit manip problem indeed. The motivation behind the problem is that the AND of two numbers is bound to be less that the max of them. Hence finding out the longest subarray having the max element.
