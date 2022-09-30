@@ -1,12 +1,11 @@
 class Solution {
 public:
-    int addRungs(vector<int>& rungs, int dist) {
-        int prev  = 0;
-        int ans = 0;
-        for(auto x : rungs) {
-            ans += (x - prev - 1)/dist;
-            prev= x;
+    int addRungs(vector<int>& A, int dist) {
+        int pre = 0, res = 0;
+        for (int a: A) {
+            res += (a - pre - 1) / dist;
+            pre = a;
         }
-        return ans;
+        return res;
     }
 };
