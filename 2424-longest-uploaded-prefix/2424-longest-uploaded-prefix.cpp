@@ -4,20 +4,17 @@ public:
     int cur;
     LUPrefix(int n) {
         temp.resize(n+1);
-        temp[0] = 1;
+        //temp[0] = 1;
         cur = 0;
     }
     
     void upload(int video) {
-        temp[video] = 1;
-        if(video == cur+1) cur++;
-        
-        while(cur+1 < temp.size() and temp[cur+1])
-            cur++;
+        temp[video-1] = 1;
         
     }
     
     int longest() {
+        while(temp[cur]) ++cur;
         return cur;
     }
 };
