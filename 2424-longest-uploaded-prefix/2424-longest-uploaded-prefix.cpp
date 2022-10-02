@@ -1,24 +1,22 @@
 class LUPrefix {
-public:
-    vector<int> temp;
-    int cur;
+   public:
+    set<int> s;
+    int t = 0;
     LUPrefix(int n) {
-        temp.resize(n+1);
-        //temp[0] = 1;
-        cur = 0;
     }
-    
+
     void upload(int video) {
-        temp[video-1] = 1;
-        
+        s.emplace(video);
     }
-    
+
     int longest() {
-        while(temp[cur]) ++cur;
-        return cur;
+        while (s.count(t + 1)) {
+            t++;
+        }
+        return t;
     }
 };
-// 
+
 /**
  * Your LUPrefix object will be instantiated and called as such:
  * LUPrefix* obj = new LUPrefix(n);
