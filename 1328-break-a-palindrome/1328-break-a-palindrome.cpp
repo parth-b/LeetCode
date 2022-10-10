@@ -1,12 +1,14 @@
 class Solution {
 public:
-    string breakPalindrome(string pal) {
-        int i = 0; 
-        if(pal.length() == 1) return "";
-        while(i < pal.length() and pal[i] < 'b' or (pal.length()%2  and i==pal.length()/2)) i++;
-        
-        if(i == pal.length()) pal[pal.length() - 1] = 'b';
-        else pal[i] = 'a';
-        return pal;
+    string breakPalindrome(string S) {
+        int n = S.size();
+        for (int i = 0; i < n / 2; ++i) {
+            if (S[i] != 'a') {
+                S[i] = 'a';
+                return S;
+            }
+        }
+        S[n - 1] = 'b';
+        return n < 2 ? "" : S;
     }
 };
